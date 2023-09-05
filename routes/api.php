@@ -17,3 +17,18 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::namespace('App\Http\Controllers\Api\V1')->prefix('v1')->group(function() {
+    Route::namespace('Payment')->prefix('payments')->group(function() {
+        Route::controller(PaymentCrudController::class)->group(function() {
+            Route::post('/', 'store');
+        });
+    });
+
+    Route::namespace('User')->prefix('users')->group(function() {
+        Route::controller(UserInfoController::class)->group(function() {
+            Route::get('/', 'index');
+            Route::get('/{userAccount}', 'show');
+        });
+    });
+});

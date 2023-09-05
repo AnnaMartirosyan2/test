@@ -16,10 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory()->count(10)->has(
-            UserAccount::factory()->count(1)->has(
-                Transaction::factory()->count(5),
-                'transactions'
-            ), 'userAccount'
+            UserAccount::factory()->count(1), 'userAccount'
         )->create();
     }
 }
